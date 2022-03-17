@@ -1,0 +1,21 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name="surface">
+    <static>true</static>
+    <link name="link">
+      <visual name="surface_visual">
+        <geometry>
+          <plane>
+            <size>100 100</size>
+            <normal>0 0 1</normal>
+          </plane>
+        </geometry>
+        <material>
+          <ambient>0 0 1 0.5</ambient>
+          <diffuse>0 0 1 0.5</diffuse>
+          <specular>0 0 1 0.5</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

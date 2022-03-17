@@ -1,0 +1,505 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sdf version="1.7">
+  <model name="bluerov2">
+    <pose>0 0 0 0 0 0</pose>
+
+    <!-- fluid_density: @fluid_density -->
+    <!-- displaced_mass: @displaced_mass -->
+
+    <link name="base_link">
+      <inertial>
+        <pose>0 0 @mass_z 0 0 0</pose>
+        <mass>@mass</mass>
+        <inertia>
+          <ixx>@ixx</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>@iyy</iyy>
+          <iyz>0</iyz>
+          <izz>@izz</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="base_link_box">
+        <pose>0 0 0 0 0 0</pose>
+        <transparency>0.5</transparency>
+        <geometry>
+          <box>
+            <size>@visual_x @visual_y @visual_z</size>
+          </box>
+        </geometry>
+      </visual>
+
+      <visual name="base_link_dome">
+        <pose>@dome_x 0 0 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.05</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <emissive>0 1 0 0</emissive>
+        </material>
+      </visual>
+
+      <!-- Collision volume * fluid_density == displaced mass, used by BuoyancyPlugin -->
+      <collision name="base_link_collision">
+        <pose>0 0 @volume_z 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>@collision_x @collision_y @collision_z</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <sensor name="imu_sensor" type="imu">
+        <pose>0 0 0 0 0 0</pose>
+        <always_on>1</always_on>
+        <update_rate>1000.0</update_rate>
+      </sensor>
+
+    </link>
+
+    <!-- Hydrodynamics plugin -->
+    <plugin
+        filename="ignition-gazebo-hydrodynamics-system"
+        name="ignition::gazebo::systems::Hydrodynamics">
+      <link_name>base_link</link_name>
+      <water_density>@fluid_density</water_density>
+      <!-- Added mass: -->
+      <xDotU>0</xDotU>
+      <yDotV>0</yDotV>
+      <zDotW>0</zDotW>
+      <kDotP>0</kDotP>
+      <mDotQ>0</mDotQ>
+      <nDotR>0</nDotR>
+      <!-- First order stability derivative: -->
+      <xU>0</xU>
+      <yV>0</yV>
+      <zW>0</zW>
+      <kP>0</kP>
+      <mQ>0</mQ>
+      <nR>0</nR>
+      <!-- Second order stability derivative: -->
+      <xUU>@xUU</xUU>
+      <yVV>@yVV</yVV>
+      <zWW>@zWW</zWW>
+      <kPP>@kPP</kPP>
+      <mQQ>@mQQ</mQQ>
+      <nRR>@nRR</nRR>
+    </plugin>
+
+    <link name="thruster1">
+      <pose degrees="true">@thruster_x -@thruster_y 0 -90 90 -45</pose>
+      <visual name="thruster_front">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>@propeller_size</size>
+          </box>
+        </geometry>
+        <material>
+          <emissive>0 0 1 0</emissive>
+        </material>
+      </visual>
+      <visual name="thruster_back">
+        <pose>0 0 -0.005 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>@propeller_size</size>
+          </box>
+        </geometry>
+        <material>
+          <emissive>1 0 0 0</emissive>
+        </material>
+      </visual>
+      <inertial>
+        <mass>@propeller_mass</mass>
+        <inertia>
+          <ixx>@propeller_ixx</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>@propeller_iyy</iyy>
+          <iyz>0</iyz>
+          <izz>@propeller_izz</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <link name="thruster2">
+      <pose degrees="true">@thruster_x @thruster_y 0 -90 90 -135</pose>
+      <visual name="thruster_front">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>@propeller_size</size>
+          </box>
+        </geometry>
+        <material>
+          <emissive>0 0 1 0</emissive>
+        </material>
+      </visual>
+      <visual name="thruster_back">
+        <pose>0 0 -0.005 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>@propeller_size</size>
+          </box>
+        </geometry>
+        <material>
+          <emissive>1 0 0 0</emissive>
+        </material>
+      </visual>
+      <inertial>
+        <mass>@propeller_mass</mass>
+        <inertia>
+          <ixx>@propeller_ixx</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>@propeller_iyy</iyy>
+          <iyz>0</iyz>
+          <izz>@propeller_izz</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <link name="thruster3">
+      <pose degrees="true">-@thruster_x -@thruster_y 0 -90 90 45</pose>
+      <visual name="thruster_front">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>@propeller_size</size>
+          </box>
+        </geometry>
+        <material>
+          <emissive>0 0 1 0</emissive>
+        </material>
+      </visual>
+      <visual name="thruster_back">
+        <pose>0 0 -0.005 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>@propeller_size</size>
+          </box>
+        </geometry>
+        <material>
+          <emissive>1 0 0 0</emissive>
+        </material>
+      </visual>
+      <inertial>
+        <mass>@propeller_mass</mass>
+        <inertia>
+          <ixx>@propeller_ixx</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>@propeller_iyy</iyy>
+          <iyz>0</iyz>
+          <izz>@propeller_izz</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <link name="thruster4">
+      <pose degrees="true">-@thruster_x @thruster_y 0 -90 90 135</pose>
+      <visual name="thruster_front">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>@propeller_size</size>
+          </box>
+        </geometry>
+        <material>
+          <emissive>0 0 1 0</emissive>
+        </material>
+      </visual>
+      <visual name="thruster_back">
+        <pose>0 0 -0.005 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>@propeller_size</size>
+          </box>
+        </geometry>
+        <material>
+          <emissive>1 0 0 0</emissive>
+        </material>
+      </visual>
+      <inertial>
+        <mass>@propeller_mass</mass>
+        <inertia>
+          <ixx>@propeller_ixx</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>@propeller_iyy</iyy>
+          <iyz>0</iyz>
+          <izz>@propeller_izz</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <link name="thruster5">
+      <pose>0 -@vert_thruster_y @vert_thruster_z 0 0 0</pose>
+      <visual name="thruster_front">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>@propeller_size</size>
+          </box>
+        </geometry>
+        <material>
+          <emissive>0 0 1 0</emissive>
+        </material>
+      </visual>
+      <visual name="thruster_back">
+        <pose>0 0 -0.005 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>@propeller_size</size>
+          </box>
+        </geometry>
+        <material>
+          <emissive>1 0 0 0</emissive>
+        </material>
+      </visual>
+      <inertial>
+        <mass>@propeller_mass</mass>
+        <inertia>
+          <ixx>@propeller_ixx</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>@propeller_iyy</iyy>
+          <iyz>0</iyz>
+          <izz>@propeller_izz</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <link name="thruster6">
+      <pose>0 @vert_thruster_y @vert_thruster_z 0 0 0</pose>
+      <visual name="thruster_front">
+        <pose>0 0 0.005 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>@propeller_size</size>
+          </box>
+        </geometry>
+        <material>
+          <emissive>0 0 1 0</emissive>
+        </material>
+      </visual>
+      <visual name="thruster_back">
+        <pose>0 0 -0.005 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>@propeller_size</size>
+          </box>
+        </geometry>
+        <material>
+          <emissive>1 0 0 0</emissive>
+        </material>
+      </visual>
+      <inertial>
+        <mass>@propeller_mass</mass>
+        <inertia>
+          <ixx>@propeller_ixx</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>@propeller_iyy</iyy>
+          <iyz>0</iyz>
+          <izz>@propeller_izz</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <joint name="thruster1_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>thruster1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <joint name="thruster2_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>thruster2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <joint name="thruster3_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>thruster3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <joint name="thruster4_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>thruster4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <joint name="thruster5_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>thruster5</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <joint name="thruster6_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>thruster6</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <plugin
+        filename="ignition-gazebo-thruster-system"
+        name="ignition::gazebo::systems::Thruster">
+      <namespace>bluerov2</namespace>
+      <joint_name>thruster1_joint</joint_name>
+      <thrust_coefficient>@thrust_coefficient</thrust_coefficient>
+      <fluid_density>@fluid_density</fluid_density>
+      <propeller_diameter>@propeller_diameter</propeller_diameter>
+      <velocity_control>true</velocity_control>
+      <use_angvel_cmd>@use_angvel_cmd</use_angvel_cmd>
+    </plugin>
+
+    <plugin
+        filename="ignition-gazebo-thruster-system"
+        name="ignition::gazebo::systems::Thruster">
+      <namespace>bluerov2</namespace>
+      <joint_name>thruster2_joint</joint_name>
+      <thrust_coefficient>@thrust_coefficient</thrust_coefficient>
+      <fluid_density>@fluid_density</fluid_density>
+      <propeller_diameter>@propeller_diameter</propeller_diameter>
+      <velocity_control>true</velocity_control>
+      <use_angvel_cmd>@use_angvel_cmd</use_angvel_cmd>
+    </plugin>
+
+    <plugin
+        filename="ignition-gazebo-thruster-system"
+        name="ignition::gazebo::systems::Thruster">
+      <namespace>bluerov2</namespace>
+      <joint_name>thruster3_joint</joint_name>
+      <thrust_coefficient>@thrust_coefficient</thrust_coefficient>
+      <fluid_density>@fluid_density</fluid_density>
+      <propeller_diameter>@propeller_diameter</propeller_diameter>
+      <velocity_control>true</velocity_control>
+      <use_angvel_cmd>@use_angvel_cmd</use_angvel_cmd>
+    </plugin>
+
+    <plugin
+        filename="ignition-gazebo-thruster-system"
+        name="ignition::gazebo::systems::Thruster">
+      <namespace>bluerov2</namespace>
+      <joint_name>thruster4_joint</joint_name>
+      <thrust_coefficient>@thrust_coefficient</thrust_coefficient>
+      <fluid_density>@fluid_density</fluid_density>
+      <propeller_diameter>@propeller_diameter</propeller_diameter>
+      <velocity_control>true</velocity_control>
+      <use_angvel_cmd>@use_angvel_cmd</use_angvel_cmd>
+    </plugin>
+
+    <plugin
+        filename="ignition-gazebo-thruster-system"
+        name="ignition::gazebo::systems::Thruster">
+      <namespace>bluerov2</namespace>
+      <joint_name>thruster5_joint</joint_name>
+      <thrust_coefficient>@thrust_coefficient</thrust_coefficient>
+      <fluid_density>@fluid_density</fluid_density>
+      <propeller_diameter>@propeller_diameter</propeller_diameter>
+      <velocity_control>true</velocity_control>
+      <use_angvel_cmd>@use_angvel_cmd</use_angvel_cmd>
+    </plugin>
+
+    <plugin
+        filename="ignition-gazebo-thruster-system"
+        name="ignition::gazebo::systems::Thruster">
+      <namespace>bluerov2</namespace>
+      <joint_name>thruster6_joint</joint_name>
+      <thrust_coefficient>@thrust_coefficient</thrust_coefficient>
+      <fluid_density>@fluid_density</fluid_density>
+      <propeller_diameter>@propeller_diameter</propeller_diameter>
+      <velocity_control>true</velocity_control>
+      <use_angvel_cmd>@use_angvel_cmd</use_angvel_cmd>
+    </plugin>
+
+    <plugin name="ArduPilotPlugin" filename="libArduPilotPlugin.so">
+      <!-- Port settings -->
+      <fdm_addr>127.0.0.1</fdm_addr>
+      <fdm_port_in>9002</fdm_port_in>
+      <connectionTimeoutMaxCount>5</connectionTimeoutMaxCount>
+      <lock_step>0</lock_step>
+
+      <!-- TODO look at this -->
+      <!-- Frame conventions
+        Require by ArduPilot: change model and gazebo from XYZ to XY-Z coordinates
+      -->
+      <modelXYZToAirplaneXForwardZDown>0 0 0 3.141593 0 0</modelXYZToAirplaneXForwardZDown>
+      <gazeboXYZToNED>0 0 0 3.141593 0 0</gazeboXYZToNED>
+
+      <!-- Sensors -->
+      <imuName>imu_sensor</imuName>
+
+      <!-- Thrusters -->
+      <use_thrusters>true</use_thrusters>
+      <control channel="0">
+        <jointName>thruster1_joint</jointName>
+        <servo_min>@servo_min</servo_min>
+        <servo_max>@servo_max</servo_max>
+        <type>@control_type</type>
+        <offset>@control_offset</offset>
+        <multiplier>@control_multiplier</multiplier>
+      </control>
+      <control channel="1">
+        <jointName>thruster2_joint</jointName>
+        <servo_min>@servo_min</servo_min>
+        <servo_max>@servo_max</servo_max>
+        <type>@control_type</type>
+        <offset>@control_offset</offset>
+        <multiplier>@control_multiplier</multiplier>
+      </control>
+      <control channel="2">
+        <jointName>thruster3_joint</jointName>
+        <servo_min>@servo_min</servo_min>
+        <servo_max>@servo_max</servo_max>
+        <type>@control_type</type>
+        <offset>@control_offset</offset>
+        <multiplier>@control_multiplier</multiplier>
+      </control>
+      <control channel="3">
+        <jointName>thruster4_joint</jointName>
+        <servo_min>@servo_min</servo_min>
+        <servo_max>@servo_max</servo_max>
+        <type>@control_type</type>
+        <offset>@control_offset</offset>
+        <multiplier>@control_multiplier</multiplier>
+      </control>
+      <control channel="4">
+        <jointName>thruster5_joint</jointName>
+        <servo_min>@servo_min</servo_min>
+        <servo_max>@servo_max</servo_max>
+        <type>@control_type</type>
+        <offset>@control_offset</offset>
+        <multiplier>@control_multiplier</multiplier>
+      </control>
+      <control channel="5">
+        <jointName>thruster6_joint</jointName>
+        <servo_min>@servo_min</servo_min>
+        <servo_max>@servo_max</servo_max>
+        <type>@control_type</type>
+        <offset>@control_offset</offset>
+        <multiplier>@control_multiplier</multiplier>
+      </control>
+
+    </plugin>
+
+  </model>
+</sdf>
