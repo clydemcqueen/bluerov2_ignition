@@ -1,13 +1,13 @@
 # BlueROV2 in Ignition Gazebo
 
-> Proof-of-concept. This may eventually move to https://github.com/ArduPilot/SITL_Models
+> Proof-of-concept, YMMV
 
 This is a model of the BlueROV2 that runs in Ignition Gazebo.
 It uses the BuoyancyPlugin, HydrodynamicsPlugin and ThrusterPlugin.
 
 Requirements:
-* Gazebo Ignition. Tested on 7.0.0~pre1 (Ignition Garden built from source)
-* This fork of ardupilot_gazebo: https://github.com/clydemcqueen/ardupilot_gazebo/tree/ignition-garden
+* Gazebo Ignition, built from source with [this patch](https://github.com/ignitionrobotics/ign-gazebo/pull/1402)
+* [This fork of ardupilot_gazebo](https://github.com/clydemcqueen/ardupilot_gazebo/tree/ignition-garden)
 * ArduSub
 * MAVProxy
 
@@ -32,13 +32,14 @@ $ . scripts/stop.bash
 Running ArduSub:
 ~~~
 $ cd ~/projects/ardupilot
-$ Tools/autotest/sim_vehicle.py -v ArduSub -f BlueRov2 --model JSON --console
+$ Tools/autotest/sim_vehicle.py -L RATBeach -v ArduSub --model=JSON --out=udp:0.0.0.0:14550 --console
 ~~~
 
 Sending commands to ArduSub:
 ~~~
 arm throttle
-rc 5 1490
+rc 5 1450
+mode 2
 disarm
 ~~~
 
