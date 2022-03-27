@@ -2,12 +2,6 @@
 <sdf version="1.6">
   <world name="underwater">
 
-    <!-- Use a bit less CPU -->
-    <physics name="dart_100Hz" type="dart">
-      <max_step_size>0.01</max_step_size>
-      <real_time_factor>1</real_time_factor>
-    </physics>
-
     <!-- Base Ignition Gazebo plugins -->
     <plugin
         filename="ignition-gazebo-physics-system"

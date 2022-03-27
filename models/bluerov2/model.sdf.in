@@ -53,8 +53,9 @@
         </geometry>
       </collision>
 
+      <!-- IMU sensor -->
       <sensor name="imu_sensor" type="imu">
-        <pose>0 0 0 0 0 0</pose>
+        <pose degrees="true">0 0 0 180 0 0</pose>
         <always_on>1</always_on>
         <update_rate>1000.0</update_rate>
       </sensor>
@@ -316,7 +317,7 @@
       <parent>base_link</parent>
       <child>thruster1</child>
       <axis>
-        <xyz>0 0 1</xyz>
+        <xyz>0 0 -1</xyz>
       </axis>
     </joint>
 
@@ -324,7 +325,7 @@
       <parent>base_link</parent>
       <child>thruster2</child>
       <axis>
-        <xyz>0 0 1</xyz>
+        <xyz>0 0 -1</xyz>
       </axis>
     </joint>
 
@@ -332,7 +333,7 @@
       <parent>base_link</parent>
       <child>thruster3</child>
       <axis>
-        <xyz>0 0 1</xyz>
+        <xyz>0 0 -1</xyz>
       </axis>
     </joint>
 
@@ -340,7 +341,7 @@
       <parent>base_link</parent>
       <child>thruster4</child>
       <axis>
-        <xyz>0 0 1</xyz>
+        <xyz>0 0 -1</xyz>
       </axis>
     </joint>
 
@@ -348,7 +349,7 @@
       <parent>base_link</parent>
       <child>thruster5</child>
       <axis>
-        <xyz>0 0 1</xyz>
+        <xyz>0 0 -1</xyz>
       </axis>
     </joint>
 
@@ -356,7 +357,7 @@
       <parent>base_link</parent>
       <child>thruster6</child>
       <axis>
-        <xyz>0 0 1</xyz>
+        <xyz>0 0 -1</xyz>
       </axis>
     </joint>
 
@@ -440,7 +441,7 @@
       <fdm_addr>127.0.0.1</fdm_addr>
       <fdm_port_in>9002</fdm_port_in>
       <connectionTimeoutMaxCount>5</connectionTimeoutMaxCount>
-      <lock_step>0</lock_step>
+      <lock_step>1</lock_step>
 
       <!-- Transform from the Ignition Gazebo body frame (x-forward, y-left, z-up)
            to the ArduPilot body frame (x-forward, y-right, z-down) -->
