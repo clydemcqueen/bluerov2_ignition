@@ -390,7 +390,7 @@
         name="ignition::gazebo::systems::Thruster">
       <namespace>bluerov2</namespace>
       <joint_name>thruster3_joint</joint_name>
-      <!-- Spin clockwise to balance torque -->
+      <!-- Reverse spin to balance torque -->
       <thrust_coefficient>-@thrust_coefficient</thrust_coefficient>
       <fluid_density>@fluid_density</fluid_density>
       <propeller_diameter>@propeller_diameter</propeller_diameter>
@@ -403,7 +403,7 @@
         name="ignition::gazebo::systems::Thruster">
       <namespace>bluerov2</namespace>
       <joint_name>thruster4_joint</joint_name>
-      <!-- Spin clockwise to balance torque -->
+      <!-- Reverse spin to balance torque -->
       <thrust_coefficient>-@thrust_coefficient</thrust_coefficient>
       <fluid_density>@fluid_density</fluid_density>
       <propeller_diameter>@propeller_diameter</propeller_diameter>
@@ -428,7 +428,7 @@
         name="ignition::gazebo::systems::Thruster">
       <namespace>bluerov2</namespace>
       <joint_name>thruster6_joint</joint_name>
-      <!-- Spin clockwise to balance torque -->
+      <!-- Reverse spin to balance torque -->
       <thrust_coefficient>-@thrust_coefficient</thrust_coefficient>
       <fluid_density>@fluid_density</fluid_density>
       <propeller_diameter>@propeller_diameter</propeller_diameter>
@@ -455,12 +455,12 @@
       <imuName>imu_sensor</imuName>
 
       <!-- Thrusters -->
-      <use_thrusters>true</use_thrusters>
       <control channel="0">
         <jointName>thruster1_joint</jointName>
         <servo_min>@servo_min</servo_min>
         <servo_max>@servo_max</servo_max>
-        <type>@control_type</type>
+        <type>RELAY</type>
+        <topic>@thruster1_topic</topic>
         <offset>@control_offset</offset>
         <multiplier>@control_multiplier</multiplier>
       </control>
@@ -468,7 +468,8 @@
         <jointName>thruster2_joint</jointName>
         <servo_min>@servo_min</servo_min>
         <servo_max>@servo_max</servo_max>
-        <type>@control_type</type>
+        <type>RELAY</type>
+        <topic>@thruster2_topic</topic>
         <offset>@control_offset</offset>
         <multiplier>@control_multiplier</multiplier>
       </control>
@@ -476,7 +477,8 @@
         <jointName>thruster3_joint</jointName>
         <servo_min>@servo_min</servo_min>
         <servo_max>@servo_max</servo_max>
-        <type>@control_type</type>
+        <type>RELAY</type>
+        <topic>@thruster3_topic</topic>
         <offset>@control_offset</offset>
         <multiplier>@control_multiplier</multiplier>
       </control>
@@ -484,7 +486,8 @@
         <jointName>thruster4_joint</jointName>
         <servo_min>@servo_min</servo_min>
         <servo_max>@servo_max</servo_max>
-        <type>@control_type</type>
+        <type>RELAY</type>
+        <topic>@thruster4_topic</topic>
         <offset>@control_offset</offset>
         <multiplier>@control_multiplier</multiplier>
       </control>
@@ -492,7 +495,8 @@
         <jointName>thruster5_joint</jointName>
         <servo_min>@servo_min</servo_min>
         <servo_max>@servo_max</servo_max>
-        <type>@control_type</type>
+        <type>RELAY</type>
+        <topic>@thruster5_topic</topic>
         <offset>@control_offset</offset>
         <multiplier>@control_multiplier</multiplier>
       </control>
@@ -500,7 +504,8 @@
         <jointName>thruster6_joint</jointName>
         <servo_min>@servo_min</servo_min>
         <servo_max>@servo_max</servo_max>
-        <type>@control_type</type>
+        <type>RELAY</type>
+        <topic>@thruster6_topic</topic>
         <offset>@control_offset</offset>
         <multiplier>@control_multiplier</multiplier>
       </control>

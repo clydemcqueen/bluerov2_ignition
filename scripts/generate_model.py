@@ -66,27 +66,52 @@ use_angvel_cmd = True
 # ArduPilotPlugin control parameters
 servo_min = 1100
 servo_max = 1900
-control_type = "INVALID"
 control_offset = -0.5
 control_multiplier = 0
 
+# Thruster topics, the final bit will be added by update_globals()
+thruster1_topic = "/model/bluerov2/joint/thruster1_joint/cmd_"
+thruster2_topic = "/model/bluerov2/joint/thruster2_joint/cmd_"
+thruster3_topic = "/model/bluerov2/joint/thruster3_joint/cmd_"
+thruster4_topic = "/model/bluerov2/joint/thruster4_joint/cmd_"
+thruster5_topic = "/model/bluerov2/joint/thruster5_joint/cmd_"
+thruster6_topic = "/model/bluerov2/joint/thruster6_joint/cmd_"
+
 
 # Use one of the 2 control methods: thrust (force = true) or velocity (force = false)
+# TODO(clyde) thrusters 3, 4 and 6 are spinning the wrong way when force == false
 def update_globals(force):
     global use_angvel_cmd
-    global control_type
     global control_multiplier
+    global thruster1_topic
+    global thruster2_topic
+    global thruster3_topic
+    global thruster4_topic
+    global thruster5_topic
+    global thruster6_topic
 
     if force:
         print("control method = thrust force")
         use_angvel_cmd = False
-        control_type = "EFFORT"
+        thruster1_topic += "thrust"
+        thruster2_topic += "thrust"
+        thruster3_topic += "thrust"
+        thruster4_topic += "thrust"
+        thruster5_topic += "thrust"
+        thruster6_topic += "thrust"
+
         # Force range [-50, 50]
         control_multiplier = 100
     else:
         print("control method = angular velocity")
         use_angvel_cmd = True
-        control_type = "VELOCITY"
+        thruster1_topic += "vel"
+        thruster2_topic += "vel"
+        thruster3_topic += "vel"
+        thruster4_topic += "vel"
+        thruster5_topic += "vel"
+        thruster6_topic += "vel"
+
         # Velocity range TODO
         control_multiplier = 100  # TODO
 
