@@ -462,7 +462,7 @@
         <type>RELAY</type>
         <topic>@thruster1_topic</topic>
         <offset>@control_offset</offset>
-        <multiplier>@control_multiplier</multiplier>
+        <multiplier>@ccw_control_multiplier</multiplier>
       </control>
       <control channel="1">
         <jointName>thruster2_joint</jointName>
@@ -471,7 +471,7 @@
         <type>RELAY</type>
         <topic>@thruster2_topic</topic>
         <offset>@control_offset</offset>
-        <multiplier>@control_multiplier</multiplier>
+        <multiplier>@ccw_control_multiplier</multiplier>
       </control>
       <control channel="2">
         <jointName>thruster3_joint</jointName>
@@ -480,7 +480,7 @@
         <type>RELAY</type>
         <topic>@thruster3_topic</topic>
         <offset>@control_offset</offset>
-        <multiplier>@control_multiplier</multiplier>
+        <multiplier>@cw_control_multiplier</multiplier>
       </control>
       <control channel="3">
         <jointName>thruster4_joint</jointName>
@@ -489,7 +489,7 @@
         <type>RELAY</type>
         <topic>@thruster4_topic</topic>
         <offset>@control_offset</offset>
-        <multiplier>@control_multiplier</multiplier>
+        <multiplier>@cw_control_multiplier</multiplier>
       </control>
       <control channel="4">
         <jointName>thruster5_joint</jointName>
@@ -498,7 +498,7 @@
         <type>RELAY</type>
         <topic>@thruster5_topic</topic>
         <offset>@control_offset</offset>
-        <multiplier>@control_multiplier</multiplier>
+        <multiplier>@ccw_control_multiplier</multiplier>
       </control>
       <control channel="5">
         <jointName>thruster6_joint</jointName>
@@ -507,7 +507,7 @@
         <type>RELAY</type>
         <topic>@thruster6_topic</topic>
         <offset>@control_offset</offset>
-        <multiplier>@control_multiplier</multiplier>
+        <multiplier>@cw_control_multiplier</multiplier>
       </control>
 
     </plugin>

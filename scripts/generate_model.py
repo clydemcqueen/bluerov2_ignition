@@ -3,9 +3,20 @@
 """
 Generate the model.sdf file by substituting strings of the form "@foo" with calculated values
 
-There are 2 control methods: /cmd_thrust and /cmd_vel. See the comments in ArduPilotPlugin.cc for details.
+The SDF file uses the ArduPilotPlugin RELAY control method; this sends commands a specified
+ign-transport topic rather than directly controlling a joint.
+
+We use the RELAY method to send commands to the Ignition Gazebo ThrusterPlugin. The ThrusterPlugin
+supports 2 control methods:
+      control thrust via /cmd_thrust
+      control angular velocity via /cmd_vel
+
+The ThrusterPlugin uses the Fossen equation to relate thrust to angular velocity, and will apply
+thrust force to the joint and spin the propeller. Propellers have bounding boxes and inertia, so
+spinning the propeller does affect the simulation.
 """
 
+import math
 import re
 import sys
 
@@ -61,15 +72,22 @@ propeller_izz = 0.001
 # ThrusterPlugin parameters
 propeller_diameter = 0.1
 thrust_coefficient = 0.02
-use_angvel_cmd = True
+
+# Max thrust force, N
+# Both forward and reverse thrust must be the same
+max_thrust = 50
 
 # ArduPilotPlugin control parameters
 servo_min = 1100
 servo_max = 1900
 control_offset = -0.5
-control_multiplier = 0
 
-# Thruster topics, the final bit will be added by update_globals()
+# From the command line
+use_angvel_cmd = False
+
+# Set by update_globals()
+cw_control_multiplier = 0   # Thrusters 3, 4 and 6
+ccw_control_multiplier = 0  # Thrusters 1, 2 and 5
 thruster1_topic = "/model/bluerov2/joint/thruster1_joint/cmd_"
 thruster2_topic = "/model/bluerov2/joint/thruster2_joint/cmd_"
 thruster3_topic = "/model/bluerov2/joint/thruster3_joint/cmd_"
@@ -78,11 +96,16 @@ thruster5_topic = "/model/bluerov2/joint/thruster5_joint/cmd_"
 thruster6_topic = "/model/bluerov2/joint/thruster6_joint/cmd_"
 
 
-# Use one of the 2 control methods: thrust (force = true) or velocity (force = false)
-# TODO(clyde) thrusters 3, 4 and 6 are spinning the wrong way when force == false
-def update_globals(force):
-    global use_angvel_cmd
-    global control_multiplier
+# Fossen equation, see "Guidance and Control of Ocean Vehicles" p. 246
+def thrust_to_ang_vel(thrust):
+    assert thrust >= 0
+    assert thrust_coefficient >= 0
+    return math.sqrt(thrust / (fluid_density * thrust_coefficient * pow(propeller_diameter, 4)))
+
+
+def update_globals():
+    global cw_control_multiplier
+    global ccw_control_multiplier
     global thruster1_topic
     global thruster2_topic
     global thruster3_topic
@@ -90,21 +113,8 @@ def update_globals(force):
     global thruster5_topic
     global thruster6_topic
 
-    if force:
-        print("control method = thrust force")
-        use_angvel_cmd = False
-        thruster1_topic += "thrust"
-        thruster2_topic += "thrust"
-        thruster3_topic += "thrust"
-        thruster4_topic += "thrust"
-        thruster5_topic += "thrust"
-        thruster6_topic += "thrust"
-
-        # Force range [-50, 50]
-        control_multiplier = 100
-    else:
-        print("control method = angular velocity")
-        use_angvel_cmd = True
+    if use_angvel_cmd:
+        print("control method: angular velocity")
         thruster1_topic += "vel"
         thruster2_topic += "vel"
         thruster3_topic += "vel"
@@ -112,8 +122,23 @@ def update_globals(force):
         thruster5_topic += "vel"
         thruster6_topic += "vel"
 
-        # Velocity range TODO
-        control_multiplier = 100  # TODO
+        # Angular velocity range in rad/s
+        # Thrust ~ sqrt(angular velocity), so the curves are quite different
+        # Reverse the angular velocity for thrusters 3, 4 and 6
+        cw_control_multiplier = -thrust_to_ang_vel(max_thrust) * 2
+        ccw_control_multiplier = thrust_to_ang_vel(max_thrust) * 2
+    else:
+        print("control method: thrust force")
+        thruster1_topic += "thrust"
+        thruster2_topic += "thrust"
+        thruster3_topic += "thrust"
+        thruster4_topic += "thrust"
+        thruster5_topic += "thrust"
+        thruster6_topic += "thrust"
+
+        # Force range [-50, 50] in N
+        cw_control_multiplier = max_thrust * 2
+        ccw_control_multiplier = max_thrust * 2
 
 
 def generate_model(input_path, output_path):
@@ -129,11 +154,12 @@ if __name__ == "__main__":
     if len(sys.argv) != 4:
         print("Usage:")
         print("generate_model.py infile outfile 0|1")
-        print("0: use angular velocity")
-        print("1: use thrust force")
+        print("0: control thrust force")
+        print("1: control angular velocity")
         exit(-100)
 
-    # A bit picky, but works
-    update_globals(bool(int(sys.argv[3])))
+    use_angvel_cmd = bool(int(sys.argv[3]))
+
+    update_globals()
 
     generate_model(sys.argv[1], sys.argv[2])
