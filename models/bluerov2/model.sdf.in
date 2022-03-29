@@ -459,8 +459,8 @@
         <jointName>thruster1_joint</jointName>
         <servo_min>@servo_min</servo_min>
         <servo_max>@servo_max</servo_max>
-        <type>RELAY</type>
-        <topic>@thruster1_topic</topic>
+        <type>COMMAND</type>
+        <cmd_topic>@thruster1_topic</cmd_topic>
         <offset>@control_offset</offset>
         <multiplier>@ccw_control_multiplier</multiplier>
       </control>
@@ -468,8 +468,8 @@
         <jointName>thruster2_joint</jointName>
         <servo_min>@servo_min</servo_min>
         <servo_max>@servo_max</servo_max>
-        <type>RELAY</type>
-        <topic>@thruster2_topic</topic>
+        <type>COMMAND</type>
+        <cmd_topic>@thruster2_topic</cmd_topic>
         <offset>@control_offset</offset>
         <multiplier>@ccw_control_multiplier</multiplier>
       </control>
@@ -477,8 +477,8 @@
         <jointName>thruster3_joint</jointName>
         <servo_min>@servo_min</servo_min>
         <servo_max>@servo_max</servo_max>
-        <type>RELAY</type>
-        <topic>@thruster3_topic</topic>
+        <type>COMMAND</type>
+        <cmd_topic>@thruster3_topic</cmd_topic>
         <offset>@control_offset</offset>
         <multiplier>@cw_control_multiplier</multiplier>
       </control>
@@ -486,8 +486,8 @@
         <jointName>thruster4_joint</jointName>
         <servo_min>@servo_min</servo_min>
         <servo_max>@servo_max</servo_max>
-        <type>RELAY</type>
-        <topic>@thruster4_topic</topic>
+        <type>COMMAND</type>
+        <cmd_topic>@thruster4_topic</cmd_topic>
         <offset>@control_offset</offset>
         <multiplier>@cw_control_multiplier</multiplier>
       </control>
@@ -495,8 +495,8 @@
         <jointName>thruster5_joint</jointName>
         <servo_min>@servo_min</servo_min>
         <servo_max>@servo_max</servo_max>
-        <type>RELAY</type>
-        <topic>@thruster5_topic</topic>
+        <type>COMMAND</type>
+        <cmd_topic>@thruster5_topic</cmd_topic>
         <offset>@control_offset</offset>
         <multiplier>@ccw_control_multiplier</multiplier>
       </control>
@@ -504,8 +504,8 @@
         <jointName>thruster6_joint</jointName>
         <servo_min>@servo_min</servo_min>
         <servo_max>@servo_max</servo_max>
-        <type>RELAY</type>
-        <topic>@thruster6_topic</topic>
+        <type>COMMAND</type>
+        <cmd_topic>@thruster6_topic</cmd_topic>
         <offset>@control_offset</offset>
         <multiplier>@cw_control_multiplier</multiplier>
       </control>

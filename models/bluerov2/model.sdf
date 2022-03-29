@@ -459,8 +459,8 @@
         <jointName>thruster1_joint</jointName>
         <servo_min>1100</servo_min>
         <servo_max>1900</servo_max>
-        <type>RELAY</type>
-        <topic>/model/bluerov2/joint/thruster1_joint/cmd_thrust</topic>
+        <type>COMMAND</type>
+        <cmd_topic>/model/bluerov2/joint/thruster1_joint/cmd_thrust</cmd_topic>
         <offset>-0.5</offset>
         <multiplier>100</multiplier>
       </control>
@@ -468,8 +468,8 @@
         <jointName>thruster2_joint</jointName>
         <servo_min>1100</servo_min>
         <servo_max>1900</servo_max>
-        <type>RELAY</type>
-        <topic>/model/bluerov2/joint/thruster2_joint/cmd_thrust</topic>
+        <type>COMMAND</type>
+        <cmd_topic>/model/bluerov2/joint/thruster2_joint/cmd_thrust</cmd_topic>
         <offset>-0.5</offset>
         <multiplier>100</multiplier>
       </control>
@@ -477,8 +477,8 @@
         <jointName>thruster3_joint</jointName>
         <servo_min>1100</servo_min>
         <servo_max>1900</servo_max>
-        <type>RELAY</type>
-        <topic>/model/bluerov2/joint/thruster3_joint/cmd_thrust</topic>
+        <type>COMMAND</type>
+        <cmd_topic>/model/bluerov2/joint/thruster3_joint/cmd_thrust</cmd_topic>
         <offset>-0.5</offset>
         <multiplier>100</multiplier>
       </control>
@@ -486,8 +486,8 @@
         <jointName>thruster4_joint</jointName>
         <servo_min>1100</servo_min>
         <servo_max>1900</servo_max>
-        <type>RELAY</type>
-        <topic>/model/bluerov2/joint/thruster4_joint/cmd_thrust</topic>
+        <type>COMMAND</type>
+        <cmd_topic>/model/bluerov2/joint/thruster4_joint/cmd_thrust</cmd_topic>
         <offset>-0.5</offset>
         <multiplier>100</multiplier>
       </control>
@@ -495,8 +495,8 @@
         <jointName>thruster5_joint</jointName>
         <servo_min>1100</servo_min>
         <servo_max>1900</servo_max>
-        <type>RELAY</type>
-        <topic>/model/bluerov2/joint/thruster5_joint/cmd_thrust</topic>
+        <type>COMMAND</type>
+        <cmd_topic>/model/bluerov2/joint/thruster5_joint/cmd_thrust</cmd_topic>
         <offset>-0.5</offset>
         <multiplier>100</multiplier>
       </control>
@@ -504,8 +504,8 @@
         <jointName>thruster6_joint</jointName>
         <servo_min>1100</servo_min>
         <servo_max>1900</servo_max>
-        <type>RELAY</type>
-        <topic>/model/bluerov2/joint/thruster6_joint/cmd_thrust</topic>
+        <type>COMMAND</type>
+        <cmd_topic>/model/bluerov2/joint/thruster6_joint/cmd_thrust</cmd_topic>
         <offset>-0.5</offset>
         <multiplier>100</multiplier>
       </control>
