@@ -7,7 +7,7 @@ It uses the BuoyancyPlugin, HydrodynamicsPlugin and ThrusterPlugin.
 
 Requirements:
 * Gazebo Ignition, built from source with [this patch](https://github.com/ignitionrobotics/ign-gazebo/pull/1402)
-* [This fork of ardupilot_gazebo](https://github.com/clydemcqueen/ardupilot_gazebo/tree/ignition-garden)
+* ardupilot_gazebo, built from source with [this patch](https://github.com/ArduPilot/ardupilot_gazebo/pull/18)
 * ArduSub
 * MAVProxy
 
