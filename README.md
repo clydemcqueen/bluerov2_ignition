@@ -1,13 +1,13 @@
 # BlueROV2 in Ignition Gazebo
 
-> Proof-of-concept, YMMV
+> Status: proof-of-concept
 
 This is a model of the BlueROV2 that runs in Ignition Gazebo.
 It uses the BuoyancyPlugin, HydrodynamicsPlugin and ThrusterPlugin.
 
 Requirements:
-* Gazebo Ignition, built from source with [this patch](https://github.com/ignitionrobotics/ign-gazebo/pull/1402)
-* ardupilot_gazebo, built from source with [this patch](https://github.com/ArduPilot/ardupilot_gazebo/pull/18)
+* Ignition Gazebo, built from source with [this patch](https://github.com/ignitionrobotics/ign-gazebo/pull/1402)
+* ardupilot_gazebo, built from source on [this branch](https://github.com/ArduPilot/ardupilot_gazebo/tree/ignition-garden)
 * ArduSub
 * MAVProxy
 
@@ -25,8 +25,8 @@ Directly send thrust commands:
 ~~~
 $ . ~/projects/ignition_ws/install/setup.bash
 $ cd ~/projects/bluerov2_ignition
-$ . scripts/cw.bash
-$ . scripts/stop.bash
+$ . scripts/cw.sh
+$ . scripts/stop.sh
 ~~~
 
 Running ArduSub:
@@ -44,9 +44,8 @@ disarm
 ~~~
 
 Caveats:
-* The model needs a lot of tuning
+* The model needs tuning
 * The visuals are quite basic
-* There are probably bugs
 
 References:
 * https://github.com/ardupilot/ardupilot_gazebo/wiki

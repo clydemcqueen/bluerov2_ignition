@@ -3,7 +3,7 @@
 """
 Generate the model.sdf file by substituting strings of the form "@foo" with calculated values
 
-The SDF file uses the ArduPilotPlugin COMMAND control method; this sends commands a specified
+The SDF file uses the ArduPilotPlugin COMMAND control method; this sends commands to a specified
 ign-transport topic rather than directly controlling a joint.
 
 We use the COMMAND method to send commands to the Ignition Gazebo ThrusterPlugin. The ThrusterPlugin
