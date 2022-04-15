@@ -449,7 +449,7 @@
 
       <!-- Transform from the Ignition Gazebo world frame (ENU)
            to the ArduPilot world frame (NED) -->
-      <gazeboXYZToNED>0 0 0 3.141593 0 0</gazeboXYZToNED>
+      <gazeboXYZToNED>0 0 0 3.141593 0 1.5707965</gazeboXYZToNED>
 
       <!-- Sensors -->
       <imuName>imu_sensor</imuName>
