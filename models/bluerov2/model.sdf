@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<sdf version="1.7">
+<sdf version="1.6">
   <model name="bluerov2">
     <pose>0 0 0 0 0 0</pose>
 
@@ -53,9 +53,11 @@
         </geometry>
       </collision>
 
-      <!-- IMU sensor -->
+      <!-- IMU sensor gyro and accel data will be sent to ArduSub -->
       <sensor name="imu_sensor" type="imu">
-        <pose degrees="true">0 0 0 180 0 0</pose>
+        <!-- Transform from the Ignition Gazebo body frame (x-forward, y-left, z-up)
+             to the ArduPilot body frame (x-forward, y-right, z-down) -->
+        <pose>0 0 0 3.141592653589793 0 0</pose>
         <always_on>1</always_on>
         <update_rate>1000.0</update_rate>
       </sensor>
@@ -86,13 +88,13 @@
       <xUU>-33.800000000000004</xUU>
       <yVV>-54.26875</yVV>
       <zWW>-73.37135</zWW>
-      <kPP>-2.0</kPP>
-      <mQQ>-2.0</mQQ>
-      <nRR>-2.0</nRR>
+      <kPP>-4.0</kPP>
+      <mQQ>-4.0</mQQ>
+      <nRR>-4.0</nRR>
     </plugin>
 
     <link name="thruster1">
-      <pose degrees="true">0.15 -0.09 0 -90 90 -45</pose>
+      <pose>0.15 -0.09 0 -1.5707963267948966 1.5707963267948966 -0.7853981633974483</pose>
       <visual name="thruster_front">
         <pose>0 0 0.005 0 0 0</pose>
         <geometry>
@@ -129,7 +131,7 @@
     </link>
 
     <link name="thruster2">
-      <pose degrees="true">0.15 0.09 0 -90 90 -135</pose>
+      <pose>0.15 0.09 0 -1.5707963267948966 1.5707963267948966 -2.356194490192345</pose>
       <visual name="thruster_front">
         <pose>0 0 0.005 0 0 0</pose>
         <geometry>
@@ -166,7 +168,7 @@
     </link>
 
     <link name="thruster3">
-      <pose degrees="true">-0.15 -0.09 0 -90 90 45</pose>
+      <pose>-0.15 -0.09 0 -1.5707963267948966 1.5707963267948966 0.7853981633974483</pose>
       <visual name="thruster_front">
         <pose>0 0 0.005 0 0 0</pose>
         <geometry>
@@ -203,7 +205,7 @@
     </link>
 
     <link name="thruster4">
-      <pose degrees="true">-0.15 0.09 0 -90 90 135</pose>
+      <pose>-0.15 0.09 0 -1.5707963267948966 1.5707963267948966 2.356194490192345</pose>
       <visual name="thruster_front">
         <pose>0 0 0.005 0 0 0</pose>
         <geometry>
@@ -445,11 +447,11 @@
 
       <!-- Transform from the Ignition Gazebo body frame (x-forward, y-left, z-up)
            to the ArduPilot body frame (x-forward, y-right, z-down) -->
-      <modelXYZToAirplaneXForwardZDown>0 0 0 3.141593 0 0</modelXYZToAirplaneXForwardZDown>
+      <modelXYZToAirplaneXForwardZDown>0 0 0 3.141592653589793 0 0</modelXYZToAirplaneXForwardZDown>
 
       <!-- Transform from the Ignition Gazebo world frame (ENU)
            to the ArduPilot world frame (NED) -->
-      <gazeboXYZToNED>0 0 0 3.141593 0 1.5707965</gazeboXYZToNED>
+      <gazeboXYZToNED>0 0 0 3.141592653589793 0 1.5707963267948966</gazeboXYZToNED>
 
       <!-- Sensors -->
       <imuName>imu_sensor</imuName>

@@ -20,6 +20,12 @@ import math
 import re
 import sys
 
+# SDF 1.9 supports degrees="true"; provide some nice vars for earlier versions
+d180 = math.pi
+d90 = d180 / 2
+d45 = d90 / 2
+d135 = d90 + d45
+
 mass = 10
 visual_x = 0.457
 visual_y = 0.338
@@ -51,9 +57,9 @@ izz = mass / 12 * (collision_x * collision_x + collision_y * collision_y)
 xUU = -0.5 * visual_y * visual_z * 0.8 * fluid_density
 yVV = -0.5 * visual_x * visual_z * 0.95 * fluid_density
 zWW = -0.5 * visual_x * visual_y * 0.95 * fluid_density
-kPP = -0.5 * 0.004 * fluid_density
-mQQ = -0.5 * 0.004 * fluid_density
-nRR = -0.5 * 0.004 * fluid_density
+kPP = -0.5 * 0.008 * fluid_density
+mQQ = -0.5 * 0.008 * fluid_density
+nRR = -0.5 * 0.008 * fluid_density
 
 # Thruster placement
 thruster_x = 0.15
