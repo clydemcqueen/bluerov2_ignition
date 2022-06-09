@@ -64,3 +64,7 @@ repositories:
     type: git
     url: https://github.com/ignitionrobotics/sdformat
     version: e6481892
+  ros_ign:
+    type: git
+    url: https://github.com/clydemcqueen/ros_ign
+    version: clyde_garden
