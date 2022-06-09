@@ -32,7 +32,9 @@ RUN /bin/sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable
  && apt-get clean
 
 # Build Ignition
-RUN cd ${IGN_WS} \
- && colcon build --merge-install --cmake-args ' -DBUILD_TESTING=OFF' ' -DCMAKE_BUILD_TYPE=Release'
+RUN [ "/bin/bash" , "-c" , \
+  "cd ${IGN_WS} \
+  && source /opt/ros/galactic/setup.bash \
+  && colcon build --merge-install --cmake-args ' -DBUILD_TESTING=OFF' ' -DCMAKE_BUILD_TYPE=Release'" ]
 
 # TODO(clyde): update garden.repos URL
