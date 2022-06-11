@@ -41,20 +41,20 @@
       <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Sun</uri>
     </include>
 
-<!--    <include>-->
-<!--      <uri>model://terrain</uri>-->
-<!--      <pose>0 0 -10 0 0 0</pose>-->
-<!--    </include>-->
+    <include>
+      <uri>model://sand_heightmap</uri>
+      <pose>0 7 -10 0 0 0</pose>
+    </include>
 
     <include>
       <uri>model://bluerov2</uri>
       <pose>0 0 -2 0 0 0</pose>
     </include>
 
-<!--    <include>-->
-<!--      <uri>model://axes</uri>-->
-<!--      <pose>0 0 0.2 0 0 0</pose>-->
-<!--    </include>-->
+    <include>
+      <uri>model://axes</uri>
+      <pose>0 0 0.2 0 0 0</pose>
+    </include>
 
   </world>
 </sdf>
