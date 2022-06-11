@@ -1,4 +1,4 @@
-# docker build -f Dockerfile_galactic_garden -t clydemcqueen/galactic_garden:hash .
+# docker build -f Dockerfile_galactic_garden -t clydemcqueen/galactic_garden:latest .
 
 FROM osrf/ros:galactic-desktop
 
@@ -17,7 +17,7 @@ ENV IGN_WS=/home/ign_ws
 # Check out Ignition source
 RUN mkdir -p ${IGN_WS}/src \
  && cd ${IGN_WS}/src \
- && wget https://raw.githubusercontent.com/clydemcqueen/bluerov2_ignition/clyde_docker/garden.repos \
+ && wget https://raw.githubusercontent.com/clydemcqueen/bluerov2_ignition/garden.repos \
  && vcs import < garden.repos
 
 # Install Ignition dependencies
@@ -36,5 +36,3 @@ RUN [ "/bin/bash" , "-c" , \
   "cd ${IGN_WS} \
   && source /opt/ros/galactic/setup.bash \
   && colcon build --merge-install --cmake-args ' -DBUILD_TESTING=OFF' ' -DCMAKE_BUILD_TYPE=Release'" ]
-
-# TODO(clyde): update garden.repos URL

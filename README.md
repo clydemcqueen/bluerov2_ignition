@@ -7,39 +7,43 @@ It uses the BuoyancyPlugin, HydrodynamicsPlugin and ThrusterPlugin.
 
 Requirements:
 * Ignition Gazebo, built from source with [this patch](https://github.com/ignitionrobotics/ign-gazebo/pull/1402)
+  * See [garden.repos](garden.repos) for commit hashes
+  * See [Dockerfile_galactic_garden](Dockerfile_galactic_garden) for build instructions
 * ardupilot_gazebo, built from source on [this branch](https://github.com/ArduPilot/ardupilot_gazebo/tree/ignition-garden)
 * ArduSub
 * MAVProxy
 
 Running Ignition Gazebo:
 ~~~
-$ . ~/projects/ignition_ws/install/setup.bash
+$ . ~/ignition_ws/install/setup.bash
 $ ign gazebo --version
 Ignition Gazebo, version 7.0.0~pre1
-$ export IGN_GAZEBO_RESOURCE_PATH=~/projects/bluerov2_ignition/models:~/projects/bluerov2_ignition/worlds
-$ export IGN_GAZEBO_SYSTEM_PLUGIN_PATH=~/projects/ardupilot_gazebo/build
+$ export IGN_GAZEBO_RESOURCE_PATH=~/colcon_ws/src/bluerov2_ignition/models:~/colcon_ws/src/bluerov2_ignition/worlds
+$ export IGN_GAZEBO_SYSTEM_PLUGIN_PATH=~/ardupilot_gazebo/build
 $ ign gazebo -v 3 -r underwater.world
 ~~~
 
 Directly send thrust commands:
 ~~~
-$ . ~/projects/ignition_ws/install/setup.bash
-$ cd ~/projects/bluerov2_ignition
+$ . ~/ignition_ws/install/setup.bash
+$ cd ~/colcon_ws/src/bluerov2_ignition
 $ . scripts/cw.sh
 $ . scripts/stop.sh
 ~~~
 
 Running ArduSub:
 ~~~
-$ cd ~/projects/ardupilot
+$ cd ~/ardupilot
 $ Tools/autotest/sim_vehicle.py -L RATBeach -v ArduSub --model=JSON --out=udp:0.0.0.0:14550 --console
 ~~~
 
 Sending commands to ArduSub:
 ~~~
 arm throttle
-rc 5 1450
-mode 2
+rc 3 1450     
+rc 3 1500
+mode alt_hold
+rc 5 1550
 disarm
 ~~~
 
