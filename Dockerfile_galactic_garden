@@ -17,7 +17,7 @@ ENV IGN_WS=/home/ign_ws
 # Check out Ignition source
 RUN mkdir -p ${IGN_WS}/src \
  && cd ${IGN_WS}/src \
- && wget https://raw.githubusercontent.com/clydemcqueen/bluerov2_ignition/garden.repos \
+ && wget https://raw.githubusercontent.com/clydemcqueen/bluerov2_ignition/main/garden.repos \
  && vcs import < garden.repos
 
 # Install Ignition dependencies
