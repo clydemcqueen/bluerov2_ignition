@@ -1,5 +1,3 @@
-# docker build -f Dockerfile_galactic_garden -t clydemcqueen/galactic_garden:latest .
-
 FROM osrf/ros:galactic-desktop
 
 RUN apt-get update \
