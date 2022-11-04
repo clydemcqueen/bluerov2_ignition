@@ -4,7 +4,7 @@
 
   <name>bluerov2_ignition</name>
   <version>0.5.0</version>
-  <description>Model of BlueROV2 that runs in Ignition Gazebo</description>
+  <description>Model of BlueROV2 that runs in Gazebo Garden</description>
 
   <maintainer email="clyde@mcqueen.net">Clyde McQueen</maintainer>
   <license>MIT</license>

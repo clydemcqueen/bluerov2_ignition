@@ -1,4 +1,5 @@
 # docker build -f Dockerfile_galactic_garden -t clydemcqueen/galactic_garden:latest .
+# TODO(clyde) update ign -> gz
 
 FROM osrf/ros:galactic-desktop
 
