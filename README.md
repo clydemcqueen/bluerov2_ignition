@@ -8,8 +8,7 @@ It uses the BuoyancyPlugin, HydrodynamicsPlugin and ThrusterPlugin.
 Requirements:
 * [Gazebo Garden](https://gazebosim.org/docs/garden/install)
 * ardupilot_gazebo, built from source on [this branch](https://github.com/ArduPilot/ardupilot_gazebo/tree/ignition-garden)
-* ArduSub
-* MAVProxy
+* ArduSub and MAVProxy, see [install instructions](https://ardupilot.org/dev/docs/building-setup-linux.html)
 
 Running Gazebo Garden:
 ~~~
