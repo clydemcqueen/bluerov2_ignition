@@ -1,3 +1,9 @@
+# DEPRECATED
+#
+# This Dockerfile builds Gazebo Garden from source at a particular commit (see garden.repos).
+# Gazebo Garden binaries have been released, so this is no longer necessary.
+#
+# Usage:
 # docker build -f Dockerfile_galactic_garden -t clydemcqueen/galactic_garden:latest .
 
 FROM osrf/ros:galactic-desktop
