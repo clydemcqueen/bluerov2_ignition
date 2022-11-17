@@ -6,14 +6,14 @@ This is a model of the BlueROV2 that runs in Gazebo Garden.
 It uses the BuoyancyPlugin, HydrodynamicsPlugin and ThrusterPlugin.
 
 Requirements:
-* [Gazebo Garden](https://gazebosim.org/docs/garden/install)
+* [Gazebo Garden 7.1.0](https://gazebosim.org/docs/garden/install)
 * ardupilot_gazebo, built from source on [this branch](https://github.com/ArduPilot/ardupilot_gazebo/tree/ignition-garden)
 * ArduSub and MAVProxy, see [install instructions](https://ardupilot.org/dev/docs/building-setup-linux.html)
 
 Running Gazebo Garden:
 ~~~
 $ gz sim --version
-Gazebo Sim, version 7.0.0
+Gazebo Sim, version 7.1.0
 $ export GZ_SIM_RESOURCE_PATH=~/colcon_ws/src/bluerov2_ignition/models:~/colcon_ws/src/bluerov2_ignition/worlds
 $ export GZ_SIM_SYSTEM_PLUGIN_PATH=~/ardupilot_gazebo/build
 $ gz sim -v 3 -r underwater.world

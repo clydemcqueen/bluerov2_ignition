@@ -6,7 +6,7 @@ Generate the model.sdf file by substituting strings of the form "@foo" with calc
 The SDF file uses the ArduPilotPlugin COMMAND control method; this sends commands to a specified
 ign-transport topic rather than directly controlling a joint.
 
-We use the COMMAND method to send commands to the Ignition Gazebo ThrusterPlugin. The ThrusterPlugin
+We use the COMMAND method to send commands to the Gazebo ThrusterPlugin. The ThrusterPlugin
 supports 2 control methods:
       control thrust via /cmd_thrust
       control angular velocity via /cmd_vel

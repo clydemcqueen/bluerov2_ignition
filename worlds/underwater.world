@@ -2,29 +2,29 @@
 <sdf version="1.6">
   <world name="underwater">
 
-    <!-- Base Ignition Gazebo plugins -->
+    <!-- Base Gazebo plugins -->
     <plugin
         filename="gz-sim-physics-system"
-        name="ignition::gazebo::systems::Physics">
+        name="gz::sim::systems::Physics">
     </plugin>
     <plugin
         filename="gz-sim-user-commands-system"
-        name="ignition::gazebo::systems::UserCommands">
+        name="gz::sim::systems::UserCommands">
     </plugin>
     <plugin
         filename="gz-sim-scene-broadcaster-system"
-        name="ignition::gazebo::systems::SceneBroadcaster">
+        name="gz::sim::systems::SceneBroadcaster">
     </plugin>
 
     <!-- IMU plugin manages all IMU sensors -->
     <plugin filename="libgz-sim-imu-system.so"
-            name="ignition::gazebo::systems::Imu">
+            name="gz::sim::systems::Imu">
     </plugin>
 
     <!-- Buoyancy plugin manages buoyancy for all models -->
     <plugin
         filename="gz-sim-buoyancy-system"
-        name="ignition::gazebo::systems::Buoyancy">
+        name="gz::sim::systems::Buoyancy">
       <!-- Fluid density is 1 (air) above 0 and 1000 (water) below 0 -->
       <graded_buoyancy>
         <default_density>1000</default_density>
