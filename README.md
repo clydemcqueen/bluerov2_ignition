@@ -12,27 +12,25 @@ Requirements:
 
 Running Gazebo Garden:
 ~~~
-$ gz sim --version
-Gazebo Sim, version 7.1.0
-$ export GZ_SIM_RESOURCE_PATH=~/colcon_ws/src/bluerov2_ignition/models:~/colcon_ws/src/bluerov2_ignition/worlds
-$ export GZ_SIM_SYSTEM_PLUGIN_PATH=~/ardupilot_gazebo/build
-$ gz sim -v 3 -r underwater.world
+export GZ_SIM_RESOURCE_PATH=~/colcon_ws/src/bluerov2_ignition/models:~/colcon_ws/src/bluerov2_ignition/worlds
+export GZ_SIM_SYSTEM_PLUGIN_PATH=~/ardupilot_gazebo/build
+gz sim -v 3 -r underwater.world
 ~~~
 
-Directly send thrust commands:
+You can directly send thrust commands to the BlueROV2 model in Gazebo:
 ~~~
-$ cd ~/colcon_ws/src/bluerov2_ignition
-$ . scripts/cw.sh
-$ . scripts/stop.sh
-~~~
-
-Running ArduSub:
-~~~
-$ cd ~/ardupilot
-$ Tools/autotest/sim_vehicle.py -L RATBeach -v ArduSub --model=JSON --out=udp:0.0.0.0:14550 --console
+cd ~/colcon_ws/src/bluerov2_ignition
+. scripts/cw.sh
+. scripts/stop.sh
 ~~~
 
-Sending commands to ArduSub:
+Now Launch ArduSub:
+~~~
+cd ~/ardupilot
+Tools/autotest/sim_vehicle.py -L RATBeach -v ArduSub --model=JSON --out=udp:0.0.0.0:14550 --console
+~~~
+
+Use MAVProxy to send commands to ArduSub:
 ~~~
 arm throttle
 rc 3 1450     
@@ -53,3 +51,4 @@ References:
 * https://ardupilot.org/dev/docs/setting-up-sitl-on-linux.html
 * https://ardupilot.org/mavproxy/docs/getting_started/download_and_installation.html
 * https://www.ardusub.com/developers/rc-input-and-output.html
+* https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html
