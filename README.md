@@ -5,12 +5,17 @@
 This is a model of the BlueROV2 that runs in Gazebo Garden.
 It uses the BuoyancyPlugin, HydrodynamicsPlugin and ThrusterPlugin.
 
-Requirements:
-* [Gazebo Garden 7.1.0](https://gazebosim.org/docs/garden/install)
-* ardupilot_gazebo, built from source on [this branch](https://github.com/ArduPilot/ardupilot_gazebo/tree/ignition-garden)
-* ArduSub and MAVProxy, see [install instructions](https://ardupilot.org/dev/docs/building-setup-linux.html)
+## Requirements
 
-Running Gazebo Garden:
+* [Gazebo Garden 7.1.0](https://gazebosim.org/docs/garden/install)
+* [ardupilot_gazebo](https://github.com/ArduPilot/ardupilot_gazebo)
+* [ArduSub and MAVProxy](https://ardupilot.org/dev/docs/building-setup-linux.html)
+
+See the [Dockerfile](docker/Dockerfile) for installation details.
+
+## Running Gazebo
+
+Launch Gazebo:
 ~~~
 export GZ_SIM_RESOURCE_PATH=~/colcon_ws/src/bluerov2_ignition/models:~/colcon_ws/src/bluerov2_ignition/worlds
 export GZ_SIM_SYSTEM_PLUGIN_PATH=~/ardupilot_gazebo/build
@@ -24,7 +29,7 @@ cd ~/colcon_ws/src/bluerov2_ignition
 . scripts/stop.sh
 ~~~
 
-Now Launch ArduSub:
+Now Launch ArduSub and ardupilot_gazebo:
 ~~~
 cd ~/ardupilot
 Tools/autotest/sim_vehicle.py -L RATBeach -v ArduSub --model=JSON --out=udp:0.0.0.0:14550 --console
@@ -40,11 +45,11 @@ rc 5 1550
 disarm
 ~~~
 
-Caveats:
+## Caveats:
 * The model needs tuning
 * The visuals are quite basic
 
-References:
+## References:
 * https://github.com/ardupilot/ardupilot_gazebo/wiki
 * https://gazebosim.org/docs/garden/install
 * https://ardupilot.org/dev/docs/building-setup-linux.html
