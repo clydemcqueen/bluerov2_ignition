@@ -5,6 +5,9 @@
 This is a model of the BlueROV2 that runs in Gazebo Garden.
 It uses the BuoyancyPlugin, HydrodynamicsPlugin and ThrusterPlugin.
 
+![RVIZ2_GUI](images/gazebo.png)
+
+
 ## Requirements
 
 * [Gazebo Garden 7.1.0](https://gazebosim.org/docs/garden/install)
