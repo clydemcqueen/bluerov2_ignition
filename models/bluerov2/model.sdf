@@ -5,6 +5,7 @@
 
     <!-- BlueROV2 thruster reference: http://www.ardusub.com/introduction/features.html -->
     <!-- fluid_density: 1000 -->
+    <!-- total_mass: 10.012 -->
     <!-- displaced_mass: 10.05 -->
 
     <link name="base_link">

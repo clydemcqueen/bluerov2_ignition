@@ -21,6 +21,13 @@
             name="gz::sim::systems::Imu">
     </plugin>
 
+    <!-- Required for gpu_lidar sensor, emulating the Ping sonar sensor -->
+    <plugin
+      filename="gz-sim-sensors-system"
+      name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
     <!-- Buoyancy plugin manages buoyancy for all models -->
     <plugin
         filename="gz-sim-buoyancy-system"
@@ -34,7 +41,7 @@
         </density_change>
       </graded_buoyancy>
       <!-- Enable by model name -->
-      <enable>bluerov2</enable>
+      <enable>br2_ping</enable>
     </plugin>
 
     <include>
@@ -47,7 +54,7 @@
     </include>
 
     <include>
-      <uri>model://bluerov2</uri>
+      <uri>model://br2_ping</uri>
       <pose>0 0 -2 0 0 0</pose>
     </include>
 

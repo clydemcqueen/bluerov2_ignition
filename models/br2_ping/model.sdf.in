@@ -1,16 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <sdf version="1.6">
-  <model name="bluerov2">
+  <model name="br2_ping">
     <pose>0 0 0 0 0 0</pose>
 
     <!-- BlueROV2 thruster reference: http://www.ardusub.com/introduction/features.html -->
     <!-- fluid_density: @fluid_density -->
+    <!-- total_mass: @total_mass -->
     <!-- displaced_mass: @displaced_mass -->
 
     <link name="base_link">
       <inertial>
         <pose>0 0 @mass_z 0 0 0</pose>
-        <mass>@mass</mass>
+        <mass>@base_mass</mass>
         <inertia>
           <ixx>@ixx</ixx>
           <ixy>0</ixy>
@@ -438,6 +439,77 @@
       <use_angvel_cmd>@use_angvel_cmd</use_angvel_cmd>
     </plugin>
 
+    <link name='ping_link'>
+      <pose>@ping_x 0 @ping_z 0 0 0</pose>
+      <inertial>
+        <mass>@ping_mass</mass>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0</iyz>
+          <izz>0.001</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="ping_visual">
+        <geometry>
+          <cylinder>
+            <length>@ping_length</length>
+            <radius>@ping_radius</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <emissive>0 1 0 0</emissive>
+        </material>
+      </visual>
+
+      <!-- Use a gpu_lidar sensor to emulate a Ping sonar sensor -->
+      <sensor name='ping_sonar' type='gpu_lidar'>
+        <always_on>1</always_on>
+        <update_rate>20</update_rate>
+        <visualize>1</visualize>
+        <topic>ping_link/sensor/sonar</topic>
+        <pose>0 0 0 0 @d90 0</pose>
+        <ray>
+          <!-- TODO improve this model -->
+          <scan>
+            <horizontal>
+              <samples>5</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.14835</min_angle>
+              <max_angle>0.14835</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>3</samples>
+              <resolution>1</resolution>
+              <min_angle>0</min_angle>
+              <max_angle>0.14835</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.2</min>
+            <max>50</max>
+            <resolution>0.02</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.1</mean>
+            <stddev>0.005</stddev>
+          </noise>
+        </ray>
+      </sensor>
+    </link>
+
+    <joint name='ping_joint' type='revolute'>
+      <parent>base_link</parent>
+      <child>ping_link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
     <plugin name="ArduPilotPlugin" filename="libArduPilotPlugin.so">
       <!-- Port settings -->
       <fdm_addr>127.0.0.1</fdm_addr>
@@ -511,6 +583,23 @@
         <offset>@control_offset</offset>
         <multiplier>@cw_control_multiplier</multiplier>
       </control>
+
+      <!--
+        Configure ArduSub to use a SITL rangefinder backend:
+        param set RNGFND1_TYPE 100        # Type = SITL
+        param set RNGFND1_FUNCTION 0      # Function = LINEAR
+        param set RNGFND1_MIN_CM 20       # Min distance is 0.5m
+        param set RNGFND1_MAX_CM 5000     # Max distance is 50m
+        param set RNGFND1_ORIENT 25       # Down
+        param set RNGFND1_POS_X @ping_x
+        param set RNGFND1_POS_Y 0.0
+        param set RNGFND1_POS_Z @ping_z
+      -->
+      <sensor>
+        <type>sonar</type>
+        <index>1</index>
+        <topic>ping_link/sensor/sonar</topic>
+      </sensor>
 
     </plugin>
 

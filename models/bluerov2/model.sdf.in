@@ -5,12 +5,13 @@
 
     <!-- BlueROV2 thruster reference: http://www.ardusub.com/introduction/features.html -->
     <!-- fluid_density: @fluid_density -->
+    <!-- total_mass: @total_mass -->
     <!-- displaced_mass: @displaced_mass -->
 
     <link name="base_link">
       <inertial>
         <pose>0 0 @mass_z 0 0 0</pose>
-        <mass>@mass</mass>
+        <mass>@base_mass</mass>
         <inertia>
           <ixx>@ixx</ixx>
           <ixy>0</ixy>
