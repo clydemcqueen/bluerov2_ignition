@@ -22,7 +22,7 @@
       </inertial>
 
       <visual name="base_link_visual">
-        <pose>0 0 0 1.570796 0 1.570796</pose>
+        <pose>-0.01 -0.017 0.03 1.570796 0 1.570796</pose>
         <geometry>
           <mesh>
             <uri>model://bluerov2/meshes/bluerov2.stl</uri>
@@ -34,6 +34,11 @@
           <diffuse>0.70 0.70 0.70</diffuse>
           <specular>0.1 0.1 0.1</specular>
         </material>
+        <geometry>
+          <box>
+            <size>0.457 0.338 0.25</size>
+          </box>
+        </geometry>
       </visual>
 
       <!-- Collision volume * fluid_density == displaced mass, used by BuoyancyPlugin -->

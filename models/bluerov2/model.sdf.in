@@ -21,26 +21,24 @@
         </inertia>
       </inertial>
 
-      <visual name="base_link_box">
-        <pose>0 0 0 0 0 0</pose>
-        <transparency>0.5</transparency>
+      <visual name="base_link_visual">
+        <pose>-0.01 -0.017 0.03 1.570796 0 1.570796</pose>
+        <geometry>
+          <mesh>
+            <uri>model://bluerov2/meshes/bluerov2.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.70 0.70 0.70</ambient>
+          <diffuse>0.70 0.70 0.70</diffuse>
+          <specular>0.1 0.1 0.1</specular>
+        </material>
         <geometry>
           <box>
             <size>@visual_x @visual_y @visual_z</size>
           </box>
         </geometry>
-      </visual>
-
-      <visual name="base_link_dome">
-        <pose>@dome_x 0 0 0 0 0</pose>
-        <geometry>
-          <sphere>
-            <radius>0.05</radius>
-          </sphere>
-        </geometry>
-        <material>
-          <emissive>0 1 0 0</emissive>
-        </material>
       </visual>
 
       <!-- Collision volume * fluid_density == displaced mass, used by BuoyancyPlugin -->
