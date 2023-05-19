@@ -21,25 +21,18 @@
         </inertia>
       </inertial>
 
-      <visual name="base_link_box">
-        <pose>0 0 0 0 0 0</pose>
-        <transparency>0.5</transparency>
+      <visual name="base_link_visual">
+        <pose>0 0 0 1.570796 0 1.570796</pose>
         <geometry>
-          <box>
-            <size>0.457 0.338 0.25</size>
-          </box>
-        </geometry>
-      </visual>
-
-      <visual name="base_link_dome">
-        <pose>0.2285 0 0 0 0 0</pose>
-        <geometry>
-          <sphere>
-            <radius>0.05</radius>
-          </sphere>
+          <mesh>
+            <uri>model://bluerov2/meshes/bluerov2.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
         </geometry>
         <material>
-          <emissive>0 1 0 0</emissive>
+          <ambient>0.70 0.70 0.70</ambient>
+          <diffuse>0.70 0.70 0.70</diffuse>
+          <specular>0.1 0.1 0.1</specular>
         </material>
       </visual>
 
