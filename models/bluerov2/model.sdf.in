@@ -22,7 +22,7 @@
       </inertial>
 
       <visual name="base_link_visual">
-        <pose>-0.01 -0.017 0.03 1.570796 0 1.570796</pose>
+        <pose>-0.134 -0.4935 0.17 @d90 0 @d90</pose>
         <geometry>
           <mesh>
             <uri>model://bluerov2/meshes/bluerov2.stl</uri>
@@ -34,11 +34,6 @@
           <diffuse>0.70 0.70 0.70</diffuse>
           <specular>0.1 0.1 0.1</specular>
         </material>
-        <geometry>
-          <box>
-            <size>@visual_x @visual_y @visual_z</size>
-          </box>
-        </geometry>
       </visual>
 
       <!-- Collision volume * fluid_density == displaced mass, used by BuoyancyPlugin -->
@@ -93,26 +88,18 @@
 
     <link name="thruster1">
       <pose>@thruster_x -@thruster_y 0 -@d90 @d90 -@d45</pose>
-      <visual name="thruster_front">
-        <pose>0 0 0.005 0 0 0</pose>
+      <visual name="thruster_prop_visual">
+        <pose>0 0 0 0 @d180 0</pose>
         <geometry>
-          <box>
-            <size>@propeller_size</size>
-          </box>
+          <mesh>
+            <uri>model://bluerov2/meshes/t200-prop-cw.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
         </geometry>
         <material>
-          <emissive>0 0 1 0</emissive>
-        </material>
-      </visual>
-      <visual name="thruster_back">
-        <pose>0 0 -0.005 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>@propeller_size</size>
-          </box>
-        </geometry>
-        <material>
-          <emissive>1 0 0 0</emissive>
+          <ambient>0 0.4 1.0</ambient>
+          <diffuse>0 0.4 1.0</diffuse>
+          <specular>0.1 0.1 0.1</specular>
         </material>
       </visual>
       <inertial>
@@ -130,26 +117,17 @@
 
     <link name="thruster2">
       <pose>@thruster_x @thruster_y 0 -@d90 @d90 -@d135</pose>
-      <visual name="thruster_front">
-        <pose>0 0 0.005 0 0 0</pose>
+      <visual name="thruster_prop_visual">
         <geometry>
-          <box>
-            <size>@propeller_size</size>
-          </box>
+          <mesh>
+            <uri>model://bluerov2/meshes/t200-prop-ccw.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
         </geometry>
         <material>
-          <emissive>0 0 1 0</emissive>
-        </material>
-      </visual>
-      <visual name="thruster_back">
-        <pose>0 0 -0.005 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>@propeller_size</size>
-          </box>
-        </geometry>
-        <material>
-          <emissive>1 0 0 0</emissive>
+          <ambient>0 0.4 1.0</ambient>
+          <diffuse>0 0.4 1.0</diffuse>
+          <specular>0.1 0.1 0.1</specular>
         </material>
       </visual>
       <inertial>
@@ -167,26 +145,17 @@
 
     <link name="thruster3">
       <pose>-@thruster_x -@thruster_y 0 -@d90 @d90 @d45</pose>
-      <visual name="thruster_front">
-        <pose>0 0 0.005 0 0 0</pose>
+      <visual name="thruster_prop_visual">
         <geometry>
-          <box>
-            <size>@propeller_size</size>
-          </box>
+          <mesh>
+            <uri>model://bluerov2/meshes/t200-prop-ccw.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
         </geometry>
         <material>
-          <emissive>0 0 1 0</emissive>
-        </material>
-      </visual>
-      <visual name="thruster_back">
-        <pose>0 0 -0.005 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>@propeller_size</size>
-          </box>
-        </geometry>
-        <material>
-          <emissive>1 0 0 0</emissive>
+          <ambient>0 0.4 1.0</ambient>
+          <diffuse>0 0.4 1.0</diffuse>
+          <specular>0.1 0.1 0.1</specular>
         </material>
       </visual>
       <inertial>
@@ -204,26 +173,18 @@
 
     <link name="thruster4">
       <pose>-@thruster_x @thruster_y 0 -@d90 @d90 @d135</pose>
-      <visual name="thruster_front">
-        <pose>0 0 0.005 0 0 0</pose>
+      <visual name="thruster_prop_visual">
+        <pose>0 0 0 0 @d180 0</pose>
         <geometry>
-          <box>
-            <size>@propeller_size</size>
-          </box>
+          <mesh>
+            <uri>model://bluerov2/meshes/t200-prop-cw.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
         </geometry>
         <material>
-          <emissive>0 0 1 0</emissive>
-        </material>
-      </visual>
-      <visual name="thruster_back">
-        <pose>0 0 -0.005 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>@propeller_size</size>
-          </box>
-        </geometry>
-        <material>
-          <emissive>1 0 0 0</emissive>
+          <ambient>0 0.4 1.0</ambient>
+          <diffuse>0 0.4 1.0</diffuse>
+          <specular>0.1 0.1 0.1</specular>
         </material>
       </visual>
       <inertial>
@@ -241,26 +202,17 @@
 
     <link name="thruster5">
       <pose>0 -@vert_thruster_y @vert_thruster_z 0 0 0</pose>
-      <visual name="thruster_front">
-        <pose>0 0 0.005 0 0 0</pose>
+      <visual name="thruster_prop_visual">
         <geometry>
-          <box>
-            <size>@propeller_size</size>
-          </box>
+          <mesh>
+            <uri>model://bluerov2/meshes/t200-prop-ccw.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
         </geometry>
         <material>
-          <emissive>0 0 1 0</emissive>
-        </material>
-      </visual>
-      <visual name="thruster_back">
-        <pose>0 0 -0.005 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>@propeller_size</size>
-          </box>
-        </geometry>
-        <material>
-          <emissive>1 0 0 0</emissive>
+          <ambient>0 0.4 1.0</ambient>
+          <diffuse>0 0.4 1.0</diffuse>
+          <specular>0.1 0.1 0.1</specular>
         </material>
       </visual>
       <inertial>
@@ -278,26 +230,18 @@
 
     <link name="thruster6">
       <pose>0 @vert_thruster_y @vert_thruster_z 0 0 0</pose>
-      <visual name="thruster_front">
-        <pose>0 0 0.005 0 0 0</pose>
+      <visual name="thruster_prop_visual">
+        <pose>0 0 0 0 @d180 0</pose>
         <geometry>
-          <box>
-            <size>@propeller_size</size>
-          </box>
+          <mesh>
+            <uri>model://bluerov2/meshes/t200-prop-cw.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
         </geometry>
         <material>
-          <emissive>0 0 1 0</emissive>
-        </material>
-      </visual>
-      <visual name="thruster_back">
-        <pose>0 0 -0.005 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>@propeller_size</size>
-          </box>
-        </geometry>
-        <material>
-          <emissive>1 0 0 0</emissive>
+          <ambient>0 0.4 1.0</ambient>
+          <diffuse>0 0.4 1.0</diffuse>
+          <specular>0.1 0.1 0.1</specular>
         </material>
       </visual>
       <inertial>
