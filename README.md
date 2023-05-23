@@ -50,7 +50,6 @@ disarm
 
 ## Caveats:
 * The model needs tuning
-* The visuals are quite basic
 
 ## References:
 * https://github.com/ardupilot/ardupilot_gazebo/wiki
