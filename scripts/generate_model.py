@@ -62,10 +62,10 @@ nRabsR = -0.5 * 0.008 * fluid_density
 
 # Thruster placement
 thruster_x = 0.14
-thruster_y = 0.095
+thruster_y = 0.092
 thruster_z = -0.009
-vert_thruster_y = 0.11
-vert_thruster_z = 0.081
+vert_thruster_y = 0.109
+vert_thruster_z = 0.077
 
 # Propeller link parameters
 propeller_size = "0.1 0.02 0.01"
