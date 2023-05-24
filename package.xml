@@ -3,7 +3,7 @@
 <package format="3">
 
   <name>bluerov2_ignition</name>
-  <version>0.5.0</version>
+  <version>0.6.0</version>
   <description>Model of BlueROV2 that runs in Gazebo Garden</description>
 
   <maintainer email="clyde@mcqueen.net">Clyde McQueen</maintainer>
