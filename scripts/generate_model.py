@@ -62,7 +62,7 @@ def thrust_to_ang_vel(
     thrust: float,
     propeller_diameter: float,
     thrust_coefficient: float,
-    fluid_density: float = 998,
+    #fluid_density: float = 998, moved to config files
 ) -> float:
     """Convert thrust to angular velocity.
 

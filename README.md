@@ -27,6 +27,7 @@ Gazebo can be launched using the following commands:
 export GZ_SIM_RESOURCE_PATH=~/colcon_ws/src/bluerov2_ignition/models:~/colcon_ws/src/bluerov2_ignition/worlds
 export GZ_SIM_SYSTEM_PLUGIN_PATH=~/ardupilot_gazebo/build
 gz sim -v 3 -r <gazebo-world-file>
+<gazebo-world-file> options: bluerov2 or bluerov2_heavy
 ~~~
 
 where `<gazebo-world-file>` should be replaced with the desired model's respective world
@@ -42,6 +43,7 @@ cd ~/colcon_ws/src/bluerov2_ignition
 ~~~
 
 where `<model_name>` is replaced with the name of the model launched.
+<model_name> options: bluerov2 or bluerov2_heavy
 
 Now launch ArduSub and ardupilot_gazebo:
 
@@ -51,6 +53,7 @@ Tools/autotest/sim_vehicle.py -L RATBeach -v ArduSub -f <frame> --model=JSON --o
 ~~~
 
 where `<frame>` is replaced with the frame of the desired model.
+<frame> options: gazebo-bluerov2 or vectored or vectored_6dof
 
 Use MAVProxy to send commands to ArduSub:
 

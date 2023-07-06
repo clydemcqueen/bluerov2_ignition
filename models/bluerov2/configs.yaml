@@ -1,5 +1,6 @@
 model_name: "bluerov2"
 mass: 10.0
+fluid_density: 998.0
 control_method: 0
 bounding_box:
   x: 0.457
