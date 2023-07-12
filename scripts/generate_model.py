@@ -55,14 +55,14 @@ d30 = d90 / 3
 d135 = d90 + d45
 
 # Density of water
-fluid_density = 1000.0
+#fluid_density = 1000.0
 
 
 def thrust_to_ang_vel(
     thrust: float,
     propeller_diameter: float,
     thrust_coefficient: float,
-    #fluid_density: float = 998, moved to config files
+    fluid_density: float,
 ) -> float:
     """Convert thrust to angular velocity.
 
@@ -92,6 +92,7 @@ class ModelParams:
         self,
         model_name: str,
         mass: float,
+        fluid_density: float,
         collision: tuple[float, float, float],
         center_of_mass: tuple[float, float, float],
         center_of_volume: tuple[float, float, float],
@@ -113,6 +114,7 @@ class ModelParams:
     ) -> None:
         self.model_name = f'"{model_name}"'
         self.mass = mass
+        self.fluid_density = fluid_density
 
         # The collision box is used by the BuoyancyPlugin
         self.collision_x = collision[0]
@@ -179,11 +181,11 @@ class ModelParams:
         # Configure each thruster location and topic
         if use_angvel_cmd:
             self.cw_control_multiplier = (
-                -thrust_to_ang_vel(max_thrust, propeller_diameter, thrust_coefficient)
+                -thrust_to_ang_vel(max_thrust, propeller_diameter, thrust_coefficient, fluid_density)
                 * 2
             )
             self.ccw_control_multiplier = (
-                thrust_to_ang_vel(max_thrust, propeller_diameter, thrust_coefficient)
+                thrust_to_ang_vel(max_thrust, propeller_diameter, thrust_coefficient, fluid_density)
                 * 2
             )
         else:
@@ -220,6 +222,8 @@ def get_model_params_from_config(config_path: str) -> ModelParams:
         config = yaml.safe_load(config_file)
 
         mass = config["mass"]
+        
+        fluid_density = config["fluid_density"]
 
         bounding_x = config["bounding_box"]["x"]
         bounding_y = config["bounding_box"]["y"]
@@ -300,6 +304,7 @@ def get_model_params_from_config(config_path: str) -> ModelParams:
         return ModelParams(
             config["model_name"],
             mass,
+            fluid_density,
             collision,
             (
                 config["center_of_mass"]["x"],
