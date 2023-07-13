@@ -1,6 +1,5 @@
 model_name: "bluerov2_heavy"
-mass: 13.5
-fluid_density: 998.0
+mass: 13.0
 control_method: 0
 bounding_box:
   x: 0.457
@@ -19,28 +18,6 @@ inertia:
   ixx: 0.26
   iyy: 0.23
   izz: 0.37
-drag_coefficients:
-  linear:
-    xU: 13.7
-    yV: 0.0
-    zW: 33.0
-    kP: 0.0
-    mQ: 0.8
-    nR: 0.0
-  quadratic:
-    xUabsU: 141.0
-    yVabsV: 217.0
-    zWabsW: 190.0
-    kPabsP: 1.19
-    mQabsQ: 0.47
-    nRabsR: 1.5
-added_mass_coefficients:
-  xDotU: 6.36
-  yDotV: 7.12
-  zDotW: 18.68
-  kDotP: 0.189
-  mDotQ: 0.135
-  nDotR: 0.222
 thrusters:
   - x: 0.14 # Thruster 1
     y: -0.092

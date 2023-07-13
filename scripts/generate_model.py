@@ -22,11 +22,13 @@ The YAML configuration file requires the following fields:
 
 In addition to the required fields, the following optional fields may be provided:
     - inertia: The inertia of the vehicle.
-    - drag_coefficients: The drag coefficients of the vehicle (both linear and
+    - drag: The drag coefficients of the vehicle (both linear and
         quadratic). If not provided, these will be calculated using the bounding
         box.
-    - added_mass_coefficients: The added mass of the vehicle.
+    - added_mass: The added mass of the vehicle.
     - default_current: The velocity of the ocean current.
+    - fluid_density: The density of the fluid the vehicle is moving in. This defaults to
+        1000 kg/m^3 (fresh water density).
 
 The SDF file uses the ArduPilotPlugin COMMAND control method; this sends commands to a
 specified ign-transport topic rather than directly controlling a joint.
@@ -54,9 +56,6 @@ d45 = d90 / 2
 d30 = d90 / 3
 d135 = d90 + d45
 
-# Density of water
-#fluid_density = 1000.0
-
 
 def thrust_to_ang_vel(
     thrust: float,
@@ -72,8 +71,7 @@ def thrust_to_ang_vel(
         thrust: The thrust to convert to angular velocity.
         propeller_diameter: The diameter of the thruster's propeller.
         thrust_coefficient: The thrust coefficient of the thruster.
-        fluid_density: The density of the fluid the ROV is moving in. Defaults to
-            998 (density of water).
+        fluid_density: The density of the fluid the ROV is moving in.
 
     Returns:
         Thrust converted to angular velocity.
@@ -181,11 +179,15 @@ class ModelParams:
         # Configure each thruster location and topic
         if use_angvel_cmd:
             self.cw_control_multiplier = (
-                -thrust_to_ang_vel(max_thrust, propeller_diameter, thrust_coefficient, fluid_density)
+                -thrust_to_ang_vel(
+                    max_thrust, propeller_diameter, thrust_coefficient, fluid_density
+                )
                 * 2
             )
             self.ccw_control_multiplier = (
-                thrust_to_ang_vel(max_thrust, propeller_diameter, thrust_coefficient, fluid_density)
+                thrust_to_ang_vel(
+                    max_thrust, propeller_diameter, thrust_coefficient, fluid_density
+                )
                 * 2
             )
         else:
@@ -222,8 +224,11 @@ def get_model_params_from_config(config_path: str) -> ModelParams:
         config = yaml.safe_load(config_file)
 
         mass = config["mass"]
-        
-        fluid_density = config["fluid_density"]
+
+        try:
+            fluid_density = config["fluid_density"]
+        except KeyError:
+            fluid_density = 1000.0
 
         bounding_x = config["bounding_box"]["x"]
         bounding_y = config["bounding_box"]["y"]
@@ -251,24 +256,24 @@ def get_model_params_from_config(config_path: str) -> ModelParams:
 
         try:
             linear_drag = (
-                config["linear_drag"]["xU"],
-                config["linear_drag"]["yV"],
-                config["linear_drag"]["zW"],
-                config["linear_drag"]["kP"],
-                config["linear_drag"]["mQ"],
-                config["linear_drag"]["nR"],
+                config["drag"]["linear"]["xU"],
+                config["drag"]["linear"]["yV"],
+                config["drag"]["linear"]["zW"],
+                config["drag"]["linear"]["kP"],
+                config["drag"]["linear"]["mQ"],
+                config["drag"]["linear"]["nR"],
             )
         except KeyError:
             linear_drag = (0, 0, 0, 0, 0, 0)
 
         try:
             quadratic_drag = (
-                config["quadratic_drag"]["xUabsU"],
-                config["quadratic_drag"]["yVabsV"],
-                config["quadratic_drag"]["zWabsW"],
-                config["quadratic_drag"]["kPabsP"],
-                config["quadratic_drag"]["mQabsQ"],
-                config["quadratic_drag"]["nRabsR"],
+                config["drag"]["quadratic"]["xUabsU"],
+                config["drag"]["quadratic"]["yVabsV"],
+                config["drag"]["quadratic"]["zWabsW"],
+                config["drag"]["quadratic"]["kPabsP"],
+                config["drag"]["quadratic"]["mQabsQ"],
+                config["drag"]["quadratic"]["nRabsR"],
             )
         except KeyError:
             xUabsU = -0.5 * bounding_y * bounding_z * 0.8 * fluid_density
@@ -330,6 +335,13 @@ def get_model_params_from_config(config_path: str) -> ModelParams:
 
 
 def generate_model(input_path: str, output_path: str, config_path: str) -> None:
+    """Generate the model SDF file using the provided configuration files.
+
+    Args:
+        input_path: The full path to the SDF file to inject the configurations into.
+        output_path: The full path to the output SDF file.
+        config_path: The full path to the YAML configuration file to load.
+    """
     # Get the model parameters from the config file and merge them with the global
     # constants
     params = vars(get_model_params_from_config(config_path)) | globals()

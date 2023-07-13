@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
-  <world name="bluerov2">
+  <world name="bluerov2_underwater">
 
     <!-- Base Gazebo plugins -->
     <plugin
