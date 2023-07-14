@@ -29,8 +29,9 @@ export GZ_SIM_SYSTEM_PLUGIN_PATH=~/ardupilot_gazebo/build
 gz sim -v 3 -r <gazebo-world-file>
 ~~~
 
-where `<gazebo-world-file>` should be replaced with the desired model's respective world
-configuration file.
+where `<gazebo-world-file>` should be replaced with either `bluerov2_underwater.world` for
+the BlueROV2 base configuration or `bluerov2_heavy_underwater.world` for the BlueROV2
+Heavy configuration.
 
 Once Gazebo has been launched, you can directly send thrust commands to the BlueROV2
 model in Gazebo:
@@ -41,7 +42,9 @@ cd ~/colcon_ws/src/bluerov2_ignition
 . scripts/stop.sh <model_name>
 ~~~
 
-where `<model_name>` is replaced with the name of the model launched.
+where `<model_name>` is replaced with the corresponding model defined in the world (i.e.,
+`bluerov2` for the `bluerov2_underwater.world` or `bluerov2_heavy` for the
+`bluerov2_heavy_underwater.world`).
 
 Now launch ArduSub and ardupilot_gazebo:
 
@@ -50,7 +53,8 @@ cd ~/ardupilot
 Tools/autotest/sim_vehicle.py -L RATBeach -v ArduSub -f <frame> --model=JSON --out=udp:0.0.0.0:14550 --console
 ~~~
 
-where `<frame>` is replaced with the frame of the desired model.
+where `<frame>` is replaced with either `vectored` for the BlueROV2 base configuration or
+`vectored_6dof` for the BlueROV2 Heavy configuration.
 
 Use MAVProxy to send commands to ArduSub:
 
