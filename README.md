@@ -38,8 +38,8 @@ model in Gazebo:
 
 ~~~bash
 cd ~/colcon_ws/src/bluerov2_ignition
-. scripts/cw.sh <model_name>
-. scripts/stop.sh <model_name>
+scripts/cw.sh <model_name>
+scripts/stop.sh <model_name>
 ~~~
 
 where `<model_name>` is replaced with the corresponding model defined in the world (i.e.,
