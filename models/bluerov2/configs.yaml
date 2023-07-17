@@ -1,0 +1,36 @@
+model_name: "bluerov2"
+mass: 10.0
+fluid_density: 998.0
+control_method: 0
+bounding_box:
+  x: 0.457
+  y: 0.338
+  z: 0.25
+center_of_mass:
+  x: 0.0
+  y: 0.0
+  z: 0.011
+center_of_volume:
+  x: 0.0
+  y: 0.0
+  z: 0.06
+buoyancy_adjustment: 0.05
+thrusters:
+  - x: 0.14 # Thruster 1
+    y: -0.092
+    z: 0.0
+  - x: 0.14 # Thruster 2
+    y: 0.092
+    z: 0.0
+  - x: -0.15 # Thruster 3
+    y: -0.092
+    z: 0.0
+  - x: -0.15 # Thruster 4
+    y: 0.092
+    z: 0.0
+  - x: 0.0 # Thruster 5
+    y: -0.109
+    z: 0.077
+  - x: 0.0 # Thruster 6
+    y: 0.109
+    z: 0.077

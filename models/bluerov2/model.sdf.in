@@ -1,15 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <sdf version="1.6">
-  <model name="bluerov2">
+  <model name=@model_name>
     <pose>0 0 0 0 0 0</pose>
 
     <!-- BlueROV2 thruster reference: http://www.ardusub.com/introduction/features.html -->
-    <!-- fluid_density: @fluid_density -->
-    <!-- displaced_mass: @displaced_mass -->
 
     <link name="base_link">
       <inertial>
-        <pose>0 0 @mass_z 0 0 0</pose>
+        <pose>@center_of_mass_x @center_of_mass_y @center_of_mass_z 0 0 0</pose>
         <mass>@mass</mass>
         <inertia>
           <ixx>@ixx</ixx>
@@ -32,7 +30,7 @@
 
       <!-- Collision volume * fluid_density == displaced mass, used by BuoyancyPlugin -->
       <collision name="base_link_collision">
-        <pose>0 0 @volume_z 0 0 0</pose>
+        <pose>@center_of_volume_x @center_of_volume_y @center_of_volume_z 0 0 0</pose>
         <geometry>
           <box>
             <size>@collision_x @collision_y @collision_z</size>
@@ -58,19 +56,19 @@
       <link_name>base_link</link_name>
       <water_density>@fluid_density</water_density>
       <!-- Added mass: -->
-      <xDotU>0</xDotU>
-      <yDotV>0</yDotV>
-      <zDotW>0</zDotW>
-      <kDotP>0</kDotP>
-      <mDotQ>0</mDotQ>
-      <nDotR>0</nDotR>
+      <xDotU>@xDotU</xDotU>
+      <yDotV>@yDotV</yDotV>
+      <zDotW>@zDotW</zDotW>
+      <kDotP>@kDotP</kDotP>
+      <mDotQ>@mDotQ</mDotQ>
+      <nDotR>@nDotR</nDotR>
       <!-- First order stability derivative: -->
-      <xU>0</xU>
-      <yV>0</yV>
-      <zW>0</zW>
-      <kP>0</kP>
-      <mQ>0</mQ>
-      <nR>0</nR>
+      <xU>@xU</xU>
+      <yV>@yV</yV>
+      <zW>@zW</zW>
+      <kP>@kP</kP>
+      <mQ>@mQ</mQ>
+      <nR>@nR</nR>
       <!-- Second order stability derivative: -->
       <xUabsU>@xUabsU</xUabsU>
       <yVabsV>@yVabsV</yVabsV>
@@ -81,12 +79,12 @@
     </plugin>
 
     <link name="thruster1">
-      <pose>@thruster_x -@thruster_y 0 -@d90 @d90 -@d45</pose>
+      <pose>@thruster1_x @thruster1_y @thruster1_z -@d90 @d90 -@d45</pose>
       <visual name="thruster_prop_visual">
-        <pose>0 0 0 @d90 0 0</pose>
+        <pose>0 0 0 -@d90 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://bluerov2/meshes/t200-cw-prop.dae</uri>
+            <uri>model://bluerov2/meshes/t200_ccw_prop.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -104,12 +102,12 @@
     </link>
 
     <link name="thruster2">
-      <pose>@thruster_x @thruster_y 0 -@d90 @d90 -@d135</pose>
+      <pose>@thruster2_x @thruster2_y @thruster2_z -@d90 @d90 -@d135</pose>
       <visual name="thruster_prop_visual">
         <pose>0 0 0 -@d90 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://bluerov2/meshes/t200-ccw-prop.dae</uri>
+            <uri>model://bluerov2/meshes/t200_ccw_prop.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -127,12 +125,12 @@
     </link>
 
     <link name="thruster3">
-      <pose>-@thruster_x -@thruster_y 0 -@d90 @d90 @d45</pose>
+      <pose>@thruster3_x @thruster3_y @thruster3_z -@d90 @d90 @d45</pose>
       <visual name="thruster_prop_visual">
-        <pose>0 0 0 -@d90 0 0</pose>
+        <pose>0 0 0 @d90 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://bluerov2/meshes/t200-ccw-prop.dae</uri>
+            <uri>model://bluerov2/meshes/t200_cw_prop.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -150,12 +148,12 @@
     </link>
 
     <link name="thruster4">
-      <pose>-@thruster_x @thruster_y 0 -@d90 @d90 @d135</pose>
+      <pose>@thruster4_x @thruster4_y @thruster4_z -@d90 @d90 @d135</pose>
       <visual name="thruster_prop_visual">
         <pose>0 0 0 @d90 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://bluerov2/meshes/t200-cw-prop.dae</uri>
+            <uri>model://bluerov2/meshes/t200_cw_prop.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -173,12 +171,12 @@
     </link>
 
     <link name="thruster5">
-      <pose>0 -@vert_thruster_y @vert_thruster_z 0 0 0</pose>
+      <pose>@thruster5_x @thruster5_y @thruster5_z 0 0 0</pose>
       <visual name="thruster_prop_visual">
         <pose>0 0 0 -@d90 0 @d90</pose>
         <geometry>
           <mesh>
-            <uri>model://bluerov2/meshes/t200-ccw-prop.dae</uri>
+            <uri>model://bluerov2/meshes/t200_ccw_prop.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -196,12 +194,12 @@
     </link>
 
     <link name="thruster6">
-      <pose>0 @vert_thruster_y @vert_thruster_z 0 0 0</pose>
+      <pose>@thruster6_x @thruster6_y @thruster6_z 0 0 0</pose>
       <visual name="thruster_prop_visual">
         <pose>0 0 0 @d90 0 @d90</pose>
         <geometry>
           <mesh>
-            <uri>model://bluerov2/meshes/t200-cw-prop.dae</uri>
+            <uri>model://bluerov2/meshes/t200_cw_prop.dae</uri>
           </mesh>
         </geometry>
       </visual>
