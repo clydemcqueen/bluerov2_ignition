@@ -56,6 +56,8 @@ Tools/autotest/sim_vehicle.py -L RATBeach -v ArduSub -f <frame> --model=JSON --o
 where `<frame>` is replaced with either `vectored` for the BlueROV2 base configuration or
 `vectored_6dof` for the BlueROV2 Heavy configuration.
 
+Note: if you run into problems switching between the vectored and vectored_6dof frame add the `-w` option to delete all ArduSub parameters.
+
 Use MAVProxy to send commands to ArduSub:
 
 ~~~bash
