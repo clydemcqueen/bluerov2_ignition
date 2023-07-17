@@ -11,3 +11,8 @@ gz topic -t /model/$1/joint/thruster3_joint/cmd_thrust -m gz.msgs.Double -p 'dat
 gz topic -t /model/$1/joint/thruster4_joint/cmd_thrust -m gz.msgs.Double -p 'data: 0'
 gz topic -t /model/$1/joint/thruster5_joint/cmd_thrust -m gz.msgs.Double -p 'data: 0'
 gz topic -t /model/$1/joint/thruster6_joint/cmd_thrust -m gz.msgs.Double -p 'data: 0'
+
+if [ "$1" = "bluerov2_heavy" ]; then
+   gz topic -t /model/$1/joint/thruster7_joint/cmd_thrust -m gz.msgs.Double -p 'data: 0'
+   gz topic -t /model/$1/joint/thruster8_joint/cmd_thrust -m gz.msgs.Double -p 'data: 0'
+fi
