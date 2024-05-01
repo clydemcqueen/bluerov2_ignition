@@ -41,6 +41,10 @@ ThrusterPlugin supports 2 control methods:
 The ThrusterPlugin uses the Fossen equation to relate thrust to angular velocity, and
 will apply thrust force to the joint and spin the propeller. Propellers have bounding
 boxes and inertia, so spinning the propeller does affect the simulation.
+
+Typical usage:
+scripts/generate_model.py models/bluerov2/model.sdf.in models/bluerov2/model.sdf models/bluerov2/configs.yaml
+scripts/generate_model.py models/bluerov2_heavy/model.sdf.in models/bluerov2_heavy/model.sdf models/bluerov2_heavy/configs.yaml
 """
 
 import math
